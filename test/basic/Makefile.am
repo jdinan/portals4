@@ -15,7 +15,7 @@ TESTS = \
 	test_PA_NIInit \
 	test_LA_NIInit \
 	test_bootstrap \
-	test_PA_LE_put_self \
+        test_PA_LE_put_self \
 	test_PA_ME_put_self \
 	test_LA_LE_put_self \
 	test_LA_ME_put_self \
@@ -77,6 +77,7 @@ TESTS = \
 	test_ME_flowctl_nohdr \
 	test_LE_unlink \
 	test_ME_unlink \
+        test_unlink_race \
 	test_PA_LE_persistent_search \
 	test_PA_ME_persistent_search \
 	test_ct_ack \
@@ -92,6 +93,11 @@ EXTRA_TESTS = \
 if WITH_TRIG_ME_OPS
 TESTS += \
 	test_triggered_ME_ops
+endif
+
+if WITH_UNORDERED_MATCHING
+TESTS += \
+	test_ME_unordered_match_ops
 endif
 
 check_PROGRAMS = $(TESTS)
@@ -255,6 +261,9 @@ test_triggered_ME_put_CPPFLAGS = $(AM_CPPFLAGS) -DINTERFACE=1
 test_triggered_ME_ops_SOURCES = test_triggered_me_ops.c
 test_triggered_ME_ops_CPPFLAGS = $(AM_CPP_FLAGS) -DINTERFACE=1
 
+test_ME_unordered_match_ops_SOURCES = test_unordered_match_ops.c
+test_ME_unordered_match_ops_CPPFLAGS = $(AM_CPP_FLAGS) -DINTERFACE=1
+
 test_triggered_LE_get_SOURCES = test_triggered_get.c
 test_triggered_LE_get_CPPFLAGS = $(AM_CPPFLAGS) -DINTERFACE=0
 
@@ -297,6 +306,8 @@ test_LE_unlink_CPPFLAGS = $(AM_CPPFLAGS) -DMATCHING=0
 
 test_ME_unlink_SOURCES = test_unlink.c
 test_ME_unlink_CPPFLAGS = $(AM_CPPFLAGS) -DMATCHING=1
+
+test_unlink_race_SOURCES = test_unlink_race.c
 
 test_PA_LE_persistent_search_SOURCES = test_persistent_search.c
 test_PA_LE_persistent_search_CPPFLAGS = $(AM_CPPFLAGS) -DMATCHING=0
