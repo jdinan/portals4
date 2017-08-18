@@ -122,7 +122,7 @@ static atomic_t umn_cookie = {.val = 1 };
 
 /* Last kernel generation counter seen. If it is different than the
  * current counter, then some messages are waiting. */
-static uint64_t generation_counter;
+static uint64_t generation_counter = 0;
 
 static void umn_register(ni_t *ni, mr_t *mr, void *start, size_t size)
 {
